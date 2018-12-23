@@ -1,0 +1,25 @@
+[Unit]
+Description=Qubnet daemon
+After=network.target
+
+[Service]
+User=qubnet
+Group=qubnet
+
+Type=forking
+PIDFile=/home/qubnet/.qubnet/qubnetd.pid
+ExecStart=/home/qubnet/Qubnet/qubnetd -daemon -pid=/home/qubnet/.qubnet/qubnetd.pid \
+-conf=/home/qubnet/.qubnet/qubnet.conf -datadir=/home/qubnet/.qubnet
+
+ExecStop=/home/qubnet/Qubnet/qubnet-cli -conf=/home/qubnet/.qubnet/qubnet.conf stop
+ExecStop=/usr/bin/sleep 25
+
+Restart=no
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

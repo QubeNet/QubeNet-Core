@@ -1,0 +1,11 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Qubnet Core consensus library
+Description: Library for the Qubnet consensus protocol.
+Version: 0.16.0.3
+Libs: -L${libdir} -lqubnetconsensus
+Cflags: -I${includedir}
+Requires.private: libcrypto
